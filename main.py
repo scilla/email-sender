@@ -24,13 +24,9 @@ def send_emails(
         reader = csv.DictReader(file)
         contacts = [(row["email"], row["name"]) for row in reader]
 
-    print("Connecting to the SMTP server...")
     server = smtplib.SMTP_SSL(host=smtp_server, port=smtp_port)
-
-    print("Logging in...")
     server.login(username, password)
-
-    print("Sending emails...")
+    
     for email, name in contacts:
         msg = MIMEMultipart()
         msg["Subject"] = subject
@@ -49,7 +45,6 @@ def send_emails(
             if html_body:
                 alt_part.attach(MIMEText(html_body.replace("{{name}}", name), "html"))
 
-        # Attach files if any
         if attachments:
             for file_path in attachments:
                 with open(file_path, "rb") as f:

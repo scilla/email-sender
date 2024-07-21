@@ -162,4 +162,4 @@ cython_debug/
 #.idea/
 email.html
 email.txt
-contacts.csv
+*.csv
